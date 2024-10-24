@@ -35,7 +35,11 @@ func main() {
 		fmt.Println("Enter number of tickets: ")
 		fmt.Scan(&userTickets)
 
-		if userTickets < remainingTickets {
+		isValidName := len(firstName) >= 2 && len(lastName) >= 2
+		isValidEmail := strings.Contains(email, "@")
+		isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
+
+		if isValidName && isValidEmail && isValidTicketNumber {
 			remainingTickets = remainingTickets - userTickets
 			bookings = append(bookings, firstName+" "+lastName)
 
@@ -54,10 +58,37 @@ func main() {
 				fmt.Println("Our conference is booked out. Come back next year.")
 				break
 			}
-		} else if userTickets == remainingTickets {
-			// do something else
+
 		} else {
-			fmt.Printf("We only have %v tickets remaining, so you can't book %v tickets\n", remainingTickets, userTickets)
+			if !isValidName {
+				fmt.Println("First name or last name you entered is too short")
+			}
+			if !isValidEmail {
+				fmt.Println("email address you entered doesn't contain @ sign")
+			}
+			if !isValidTicketNumber {
+				fmt.Println("Number of tickets you entered is invalid")
+			}
 		}
+	}
+
+	//Switch Case Statement
+	city := "London"
+
+	switch city {
+	case "New York":
+		fmt.Println("Booked ticket for New York")
+	case "Singapore":
+		fmt.Println("Booked ticket for Singapore")
+	case "London":
+		fmt.Println("Booked ticket for London")
+	case "Berlin":
+		fmt.Println("Booked ticket for Berlin")
+	case "Mexico City":
+		fmt.Println("Booked ticket for Mexico City")
+	case "Hong Kong":
+		fmt.Println("Booked ticket for Hong Kong")
+	default:
+		fmt.Println("No valid city selected")
 	}
 }
